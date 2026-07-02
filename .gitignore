@@ -1,0 +1,31 @@
+# Source images (full resolution originals)
+imges/proper Images/
+imges/proper images/
+imges/events/
+imges/exterior/
+imges/interior/
+
+# Backup folder
+assets/img/optimized-backup/
+
+# Sensitive files
+github_token.txt
+
+# Server scripts
+start-server.ps1
+start-server.bat
+
+# Temp / planning files
+gallery-new-items.txt
+domain-suggestions.md
+
+# Videos over 100MB (GitHub limit) - compress or use Git LFS
+imges/videos/video-tour-of-dorms.MP4
+imges/videos/VID_20260529_124507.mp4
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# All videos - host separately on YouTube
+imges/videos/
