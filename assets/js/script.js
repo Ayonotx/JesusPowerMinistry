@@ -135,35 +135,7 @@ document.querySelectorAll('.service-card, .program-card, .lecturer-card').forEac
   observer.observe(el);
 });
 
-// === Fix Image Orientation ===
-function fixImageOrientation(img) {
-  if (!img || img.naturalWidth <= 0 || img.naturalHeight <= 0) return;
-  var ratio = img.naturalWidth / img.naturalHeight;
-  var parent = img.closest('.gallery-item');
-  if (ratio >= 1.2) {
-    img.classList.add('landscape');
-    img.classList.remove('portrait');
-    if (parent) parent.style.background = '';
-  } else {
-    img.classList.remove('landscape');
-    img.classList.add('portrait');
-    if (parent) parent.style.background = '#1B2A4A';
-  }
-}
-function fixAllImages() {
-  document.querySelectorAll('.gallery-item img, .photo-carousel img, .about-image img, .about-preview img').forEach(function(el) {
-    if (el.tagName === 'IMG') {
-      if (el.complete && el.naturalWidth > 0) {
-        fixImageOrientation(el);
-      } else {
-        el.addEventListener('load', function() { fixImageOrientation(this); });
-      }
-    }
-  });
-}
-// Fix image orientation on load
-fixAllImages();
-window.addEventListener('load', fixAllImages);
+
 
 // === Scroll to Top Button ===
 const scrollTopBtn = document.getElementById('scrollTop');

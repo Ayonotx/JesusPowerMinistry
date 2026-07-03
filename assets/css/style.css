@@ -226,14 +226,13 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 7
 }
 .gallery-item {
   position: relative; border-radius: 8px; overflow: hidden; cursor: pointer;
-  aspect-ratio: 16/9; background: #e8e0d4;
-  min-height: 140px; border: 1px solid #d4cbbc;
+  background: #e8e0d4; min-height: 140px;
+  border: 1px solid #d4cbbc;
 }
 .gallery-item img {
-  width: 100%; height: 100%; object-fit: contain; transition: var(--transition);
+  width: 100%; height: auto; display: block; transition: var(--transition);
   image-orientation: from-image;
 }
-.gallery-item img.landscape { object-fit: cover; }
 .gallery-item:hover img { transform: scale(1.08); }
 .gallery-overlay {
   position: absolute; bottom: 0; left: 0; width: 100%;
