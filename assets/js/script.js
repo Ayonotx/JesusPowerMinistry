@@ -130,7 +130,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.section, .service-card, .program-card').forEach(el => {
+document.querySelectorAll('.service-card, .program-card, .lecturer-card').forEach(el => {
   el.classList.add('fade-in');
   observer.observe(el);
 });
