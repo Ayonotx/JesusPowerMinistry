@@ -1,4 +1,4 @@
-// === Mobile Navigation ===
+﻿// === Mobile Navigation ===
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -106,21 +106,39 @@ if (lightbox) {
   });
 }
 
-// === Contact Form ===
+// === Contact Form - sends via email & WhatsApp ===
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = contactForm.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    const originalBg = btn.style.background;
-    btn.textContent = 'Message Sent!';
-    btn.style.background = '#4CAF50';
-    contactForm.reset();
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.background = originalBg;
-    }, 3000);
+    const name = this.querySelector('[name="contact_name"]').value;
+    const email = this.querySelector('[name="contact_email"]').value;
+    const subject = this.querySelector('[name="subject"]').value || 'General Inquiry';
+    const message = this.querySelector('[name="message"]').value;
+
+    const body = 'Name: ' + name + '%0A' +
+                 'Email: ' + email + '%0A' +
+                 'Subject: ' + subject + '%0A' +
+                 'Message: ' + message;
+
+    const waMsg = 'Hello%2C%20I%20am%20' + encodeURIComponent(name) + '.%0A' +
+                  encodeURIComponent('Email: ') + encodeURIComponent(email) + '%0A' +
+                  encodeURIComponent('Subject: ') + encodeURIComponent(subject) + '%0A' +
+                  encodeURIComponent('Message: ') + encodeURIComponent(message);
+
+    // Show success banner with choices
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Choose how to send:';
+    btn.style.background = '#1B2A4A';
+
+    // Create action buttons
+    const actions = document.createElement('div');
+    actions.style.cssText = 'display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;';
+    actions.innerHTML = '<a href="mailto:jpowercoldwater@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + body + '" class="btn btn-primary" style="background:var(--accent);text-decoration:none;text-align:center;">&#9993; Send via Email</a>' +
+                        '<a href="https://wa.me/233556873055?text=' + waMsg + '" target="_blank" class="btn btn-primary" style="background:#25D366;text-decoration:none;text-align:center;">Send via WhatsApp</a>' +
+                        '<button type="button" class="btn" style="background:#666;color:white;border:none;cursor:pointer;" onclick="this.parentElement.parentElement.innerHTML=\\'<p style=\\\\\\'color:var(--text-light);font-size:0.9rem;\\\\\\'>You can also email us directly at <a href=\\\\\\'mailto:jpowercoldwater@gmail.com\\\\\\'>jpowercoldwater@gmail.com</a> or WhatsApp <a href=\\\\\\'https://wa.me/233556873055\\\\\\'>+233 55 687 3055</a>.</p>\\\\\';">Cancel</button>';
+
+    btn.parentNode.appendChild(actions);
   });
 }
 
@@ -151,16 +169,52 @@ if (scrollTopBtn) {
   });
 }
 
-// === Booking Form ===
+// === Booking Form - sends via email & WhatsApp ===
 const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
-  bookingForm.addEventListener('submit', (e) => {
+  bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = bookingForm.querySelector('button[type="submit"]');
-    const orig = btn.textContent;
-    btn.textContent = 'Request Submitted!';
-    btn.style.background = '#4CAF50';
-    bookingForm.reset();
-    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+    const name = this.querySelector('[name="fullname"]').value;
+    const email = this.querySelector('[name="email"]').value;
+    const phone = this.querySelector('[name="phone"]').value;
+    const bookingType = this.querySelector('[name="booking_type"]').value;
+    const arrivalDate = this.querySelector('[name="arrival_date"]').value;
+    const guests = this.querySelector('[name="guests"]').value;
+    const requests = this.querySelector('[name="requests"]').value;
+
+    const subject = 'Booking Request - Grace Centre Retreat';
+
+    const body = 'New Booking Request%0A' +
+                 '-----------------%0A' +
+                 'Name: ' + name + '%0A' +
+                 'Email: ' + email + '%0A' +
+                 'Phone: ' + phone + '%0A' +
+                 'Booking Type: ' + bookingType + '%0A' +
+                 'Arrival Date: ' + arrivalDate + '%0A' +
+                 'Number of Guests: ' + guests + '%0A' +
+                 'Additional Requests: ' + requests;
+
+    const waMsg = 'Hello%2C%20I%20would%20like%20to%20book%20the%20Grace%20Centre%20Retreat%20Center.%0A%0A' +
+                  'Name: ' + encodeURIComponent(name) + '%0A' +
+                  'Email: ' + encodeURIComponent(email) + '%0A' +
+                  'Phone: ' + encodeURIComponent(phone) + '%0A' +
+                  'Booking Type: ' + encodeURIComponent(bookingType) + '%0A' +
+                  'Arrival Date: ' + encodeURIComponent(arrivalDate) + '%0A' +
+                  'Guests: ' + encodeURIComponent(guests) + '%0A' +
+                  'Requests: ' + encodeURIComponent(requests);
+
+    // Show success banner with choices
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Choose how to send:';
+    btn.style.background = '#1B2A4A';
+
+    // Create action buttons
+    const actions = document.createElement('div');
+    actions.style.cssText = 'display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;';
+    actions.innerHTML = '<a href="mailto:jpowercoldwater@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + body + '" class="btn btn-primary" style="background:var(--accent);text-decoration:none;text-align:center;">&#9993; Send via Email</a>' +
+                        '<a href="https://wa.me/233556873055?text=' + waMsg + '" target="_blank" class="btn btn-primary" style="background:#25D366;text-decoration:none;text-align:center;">Send via WhatsApp</a>' +
+                        '<button type="button" class="btn" style="background:#666;color:white;border:none;cursor:pointer;" onclick="this.parentElement.parentElement.innerHTML=\\'<p style=\\\\\\'color:var(--text-light);font-size:0.9rem;\\\\\\'>You can also email us directly at <a href=\\\\\\'mailto:jpowercoldwater@gmail.com\\\\\\'>jpowercoldwater@gmail.com</a> or WhatsApp <a href=\\\\\\'https://wa.me/233556873055\\\\\\'>+233 55 687 3055</a>.</p>\\\\\';">Cancel</button>';
+
+    btn.parentNode.appendChild(actions);
   });
 }

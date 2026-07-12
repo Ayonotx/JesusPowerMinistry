@@ -74,20 +74,29 @@
             <h3>Website</h3>
             <p><a href="https://www.Jpcoldwater.org" target="_blank">www.Jpcoldwater.org</a></p>
           </div>
+          <div class="contact-card" style="border: 1px solid rgba(212, 175, 55, 0.4);">
+            <div class="contact-icon">&#128176;</div>
+            <h3>Payment Details</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 8px;"><strong>Mobile Money:</strong></p>
+            <p style="font-size: 0.85rem;">[Momo Number] &bull; [Network]</p>
+            <p style="font-size: 0.85rem; margin-top: 8px;"><strong>Bank Transfer:</strong></p>
+            <p style="font-size: 0.85rem;">[Bank Name] &bull; [Account Number]</p>
+            <p style="font-size: 0.85rem;">[Account Name]</p>
+          </div>
         </div>
         <form class="contact-form" id="contactForm">
           <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Send Us a Message</h3>
           <div class="form-group">
-            <input type="text" placeholder="Your Name" required>
+            <input type="text" name="contact_name" placeholder="Your Name" required>
           </div>
           <div class="form-group">
-            <input type="email" placeholder="Your Email" required>
+            <input type="email" name="contact_email" placeholder="Your Email" required>
           </div>
           <div class="form-group">
-            <input type="text" placeholder="Subject">
+            <input type="text" name="subject" placeholder="Subject">
           </div>
           <div class="form-group">
-            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-full">Send Message</button>
         </form>
