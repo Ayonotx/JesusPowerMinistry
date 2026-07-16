@@ -22,22 +22,20 @@ if (navMenu) {
 // === Hero Carousel (index.html only) ===
 const slides = document.querySelectorAll('.hero-slide');
 if (slides.length > 0) {
-  let currentSlide = 0;
-  // Wait for first image to load, then show first slide
-  let imgsLoaded = 0;
-  slides.forEach((slide, i) => {
-    const img = slide.querySelector('img');
-    if (img) {
-      if (img.complete) { imgsLoaded++; if (i === 0) slide.classList.add('active'); }
-      else { img.addEventListener('load', () => { imgsLoaded++; if (i === 0 && imgsLoaded > 0) slide.classList.add('active'); }); img.addEventListener('error', () => { imgsLoaded++; if (i === 0) slide.classList.add('active'); }); }
-    } else { imgsLoaded++; if (i === 0) slide.classList.add('active'); }
+  // Show first slide immediately, hide all others
+  slides.forEach((s, i) => {
+    s.style.opacity = i === 0 ? '1' : '0';
+    s.style.zIndex = i === 0 ? '1' : '0';
   });
-  function nextSlide() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-  }
-  setInterval(nextSlide, 5000);
+  // Rotate every 5 seconds — pure inline style, no CSS dependency
+  let current = 0;
+  setInterval(() => {
+    slides[current].style.opacity = '0';
+    slides[current].style.zIndex = '0';
+    current = (current + 1) % slides.length;
+    slides[current].style.opacity = '1';
+    slides[current].style.zIndex = '1';
+  }, 5000);
 }
 
 // === Gallery Filter ===
