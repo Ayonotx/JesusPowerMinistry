@@ -23,31 +23,13 @@ if (navMenu) {
 const slides = document.querySelectorAll('.hero-slide');
 if (slides.length > 0) {
   let currentSlide = 0;
-  let intervalId;
-
-  function showSlide(index) {
-    // Hide all slides
-    slides.forEach(function(s, i) {
-      s.style.opacity = '0';
-      s.style.zIndex = '0';
-      s.classList.remove('active');
-    });
-    // Show target slide
-    slides[index].style.opacity = '1';
-    slides[index].style.zIndex = '1';
-    slides[index].classList.add('active');
-  }
-
+  // First slide already has 'active' class in HTML, just start the rotation
   function nextSlide() {
+    slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
+    slides[currentSlide].classList.add('active');
   }
-
-  // Show first slide immediately
-  showSlide(0);
-
-  // Start carousel interval
-  intervalId = setInterval(nextSlide, 5000);
+  setInterval(nextSlide, 4000);
 }
 
 // === Gallery Filter ===
@@ -209,3 +191,4 @@ if (bookingForm) {
     btn.parentNode.appendChild(actions);
   });
 }
+
