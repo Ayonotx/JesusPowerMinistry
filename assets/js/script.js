@@ -23,18 +23,31 @@ if (navMenu) {
 const slides = document.querySelectorAll('.hero-slide');
 if (slides.length > 0) {
   let currentSlide = 0;
+  let intervalId;
 
-  // Ensure all slides use 'cover' and fade in
-  slides.forEach(function(slide) {
-    slide.style.backgroundSize = 'cover';
-  });
+  function showSlide(index) {
+    // Hide all slides
+    slides.forEach(function(s, i) {
+      s.style.opacity = '0';
+      s.style.zIndex = '0';
+      s.classList.remove('active');
+    });
+    // Show target slide
+    slides[index].style.opacity = '1';
+    slides[index].style.zIndex = '1';
+    slides[index].classList.add('active');
+  }
 
   function nextSlide() {
-    slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
+    showSlide(currentSlide);
   }
-  setInterval(nextSlide, 5000);
+
+  // Show first slide immediately
+  showSlide(0);
+
+  // Start carousel interval
+  intervalId = setInterval(nextSlide, 5000);
 }
 
 // === Gallery Filter ===
