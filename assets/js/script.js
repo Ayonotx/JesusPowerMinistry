@@ -19,24 +19,8 @@ if (navMenu) {
   });
 }
 
-// === Hero Carousel (index.html only) ===
-const slides = document.querySelectorAll('.hero-slide');
-if (slides.length > 0) {
-  // Show first slide immediately, hide all others
-  slides.forEach((s, i) => {
-    s.style.opacity = i === 0 ? '1' : '0';
-    s.style.zIndex = i === 0 ? '1' : '0';
-  });
-  // Rotate every 5 seconds — pure inline style, no CSS dependency
-  let current = 0;
-  setInterval(() => {
-    slides[current].style.opacity = '0';
-    slides[current].style.zIndex = '0';
-    current = (current + 1) % slides.length;
-    slides[current].style.opacity = '1';
-    slides[current].style.zIndex = '1';
-  }, 5000);
-}
+// === Hero Carousel (index.html only) - now handled by CSS keyframes ===
+// (No JS needed - pure CSS animation in style.css)
 
 // === Gallery Filter ===
 const filterBtns = document.querySelectorAll('.filter-btn');
