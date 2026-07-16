@@ -23,38 +23,16 @@ if (navMenu) {
 const slides = document.querySelectorAll('.hero-slide');
 if (slides.length > 0) {
   let currentSlide = 0;
-  // Preload all background images before starting carousel
-  var loadedCount = 0;
-  slides.forEach(function(slide, index) {
-    var bg = slide.style.backgroundImage;
-    if (bg && bg !== 'none') {
-      var url = bg.replace(/url\(["']?/, '').replace(/["']?\)/, '');
-      var tempImg = new Image();
-      tempImg.onload = function() {
-        loadedCount++;
-        // Check orientation
-        if (tempImg.naturalHeight > tempImg.naturalWidth) {
-          slide.style.backgroundSize = 'contain';
-          slide.style.backgroundColor = '#1B2A4A';
-        } else {
-          slide.style.backgroundSize = 'cover';
-        }
-        // Show first slide once loaded
-        if (index === 0) {
-          slide.classList.add('active');
-          slide.style.opacity = '1';
-        }
-      };
-      tempImg.src = url;
-    } else {
-      loadedCount++;
-    }
+
+  // Ensure all slides use 'cover' and fade in
+  slides.forEach(function(slide) {
+    slide.style.backgroundSize = 'cover';
   });
+
   function nextSlide() {
-    slides.forEach(function(s) { s.classList.remove('active'); s.style.opacity = '0'; });
+    slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add('active');
-    slides[currentSlide].style.opacity = '1';
   }
   setInterval(nextSlide, 5000);
 }
