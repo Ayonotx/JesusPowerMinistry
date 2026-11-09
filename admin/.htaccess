@@ -23,14 +23,3 @@ Options -Indexes
 
 # Block access to the include directory entirely
 RedirectMatch 403 ^/admin/inc(/|$)
-
-# Do not execute anything in the assets folder
-<FilesMatch "\.(php|phtml|phar|phps|pl|py|cgi|sh|htaccess)$">
-  <IfModule mod_authz_core.c>
-    Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
-  </IfModule>
-</FilesMatch>
