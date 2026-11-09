@@ -1,0 +1,73 @@
+{
+  "events": [
+    {
+      "id": "opening-2024",
+      "title": "Opening & inauguration of Grace Centre",
+      "date": "2024-04-24",
+      "category": "milestone",
+      "description": "The Jesus Power School of Ministry and Retreat Center was inaugurated by Rev. Dr. Stephen Wengam, General Superintendent of Assemblies of God Ghana, at Abbeykope, Dawhenya.",
+      "image": "assets/img/optimized/opening-event.jpg",
+      "published": true,
+      "featured": true
+    },
+    {
+      "id": "library-commissioning-2024",
+      "title": "Commissioning of the Apostle Dr. Jones Boateng Library",
+      "date": "2024-04-24",
+      "category": "milestone",
+      "description": "The library was commissioned alongside the main facility, opening a collection of more than 3,000 Christian titles to students and the community.",
+      "image": "assets/img/optimized/library-commisioning.jpg",
+      "published": true
+    },
+    {
+      "id": "matriculation",
+      "title": "Matriculation ceremony",
+      "date": "",
+      "dateLabel": "Matriculation",
+      "category": "school",
+      "description": "The inaugural matriculation of students into the Jesus Power School of Ministry.",
+      "image": "assets/img/optimized/matriculation.jpg",
+      "published": true
+    },
+    {
+      "id": "graduation",
+      "title": "Graduation & commissioning service",
+      "date": "",
+      "dateLabel": "Graduation",
+      "category": "school",
+      "description": "Students completed their programmes and were commissioned for ministry across Ghana and beyond.",
+      "image": "assets/img/optimized/graduation-and-commisioning.jpg",
+      "published": true
+    },
+    {
+      "id": "breast-screening",
+      "title": "Free breast screening and health sensitisation",
+      "date": "",
+      "dateLabel": "Community outreach",
+      "category": "outreach",
+      "description": "A free breast screening and breast health sensitisation programme organised by the Reading Club for the community.",
+      "image": "assets/img/optimized/free-breast-screening-and-breast-health-sensitization-organized-by-the-reading-club-for-the-community-october-2024.jpg",
+      "published": true
+    },
+    {
+      "id": "health-screening",
+      "title": "Community health screening",
+      "date": "",
+      "dateLabel": "Community outreach",
+      "category": "outreach",
+      "description": "Health screening for residents, run from the centre with volunteer support.",
+      "image": "assets/img/optimized/event-helth-screening-evnt-1.jpg",
+      "published": true
+    },
+    {
+      "id": "reading-club",
+      "title": "Apostle Akomeah Children's Reading Club",
+      "date": "",
+      "dateLabel": "Reading club",
+      "category": "outreach",
+      "description": "Launched on 28 February 2026 to support children in the community with academic learning while nurturing their spiritual growth.",
+      "image": "assets/img/optimized/reading-club-activities.jpg",
+      "published": true
+    }
+  ]
+}

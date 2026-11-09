@@ -1,0 +1,36 @@
+# JPSMRC admin — access and hardening rules
+Options -Indexes
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+# Never serve internals
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(bootstrap|auth|layout|uploads)\.php$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^(bootstrap|auth|layout|uploads)\.php$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+# Block access to the include directory entirely
+RedirectMatch 403 ^/admin/inc(/|$)
+
+# Do not execute anything in the assets folder
+<FilesMatch "\.(php|phtml|phar|phps|pl|py|cgi|sh|htaccess)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

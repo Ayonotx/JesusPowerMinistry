@@ -1,0 +1,13 @@
+# Public content data. JSON must stay readable for the website,
+# but nothing here should ever be executed or listed.
+Options -Indexes
+
+<FilesMatch "\.(php|phtml|phar|pl|py|cgi|sh)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

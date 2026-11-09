@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /data/private/
+
+Sitemap: https://jesuspowersmrc.org/sitemap.xml
