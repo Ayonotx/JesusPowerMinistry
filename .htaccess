@@ -35,4 +35,15 @@ Options -Indexes
   </IfModule>
 </FilesMatch>
 
+# Block downloads of site archives/backups left in the web root.
+<FilesMatch "\.(zip|tar|gz|tgz|rar|7z|sql|bak|old|log)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
 ErrorDocument 404 /404.html
