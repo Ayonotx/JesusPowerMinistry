@@ -79,11 +79,12 @@ const FILES = [
 
   ["sitemap.xml", "/public_html/sitemap.xml"],
 
-  ["data/events.json", "/public_html/data/events.json"],
-  ["data/gallery.json", "/public_html/data/gallery.json"],
-  ["data/announcements.json", "/public_html/data/announcements.json"],
   ["data/.htaccess", "/public_html/data/.htaccess"],
   ["data/private/.htaccess", "/public_html/data/private/.htaccess"],
+
+  // NOTE: data/events.json, data/gallery.json and data/announcements.json are
+  // owned by the admin panel at runtime. Never deploy them over live content —
+  // that would wipe anything the ministry office has added.
 
   ["admin/index.php", "/public_html/admin/index.php"],
   ["admin/setup.php", "/public_html/admin/setup.php"],

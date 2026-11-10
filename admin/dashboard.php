@@ -17,7 +17,10 @@ $noticeCount = count($announcements['items'] ?? []);
 $uploadCount = 0;
 if (is_dir(UPLOAD_DIR)) {
     foreach (scandir(UPLOAD_DIR) ?: [] as $name) {
-        if ($name !== '.' && $name !== '..' && is_file(UPLOAD_DIR . '/' . $name)) {
+        if ($name !== '' && $name[0] === '.') {
+            continue;
+        }
+        if (is_file(UPLOAD_DIR . '/' . $name)) {
             $uploadCount++;
         }
     }
