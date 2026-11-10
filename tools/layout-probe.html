@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Layout probe</title>
+  <style>
+    body { margin: 0; background: #1d2128; font-family: system-ui, sans-serif; }
+    .row { display: flex; gap: 12px; padding: 12px; align-items: flex-start; flex-wrap: wrap; }
+    figure { margin: 0; }
+    figcaption { color: #cdd4de; font-size: 11px; padding: 2px 0 4px; }
+    iframe { border: 0; background: #fff; display: block; }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <figure><figcaption>1920</figcaption><iframe src="../index.html" width="1920" height="900"></iframe></figure>
+    <figure><figcaption>1440</figcaption><iframe src="../index.html" width="1440" height="900"></iframe></figure>
+    <figure><figcaption>1366</figcaption><iframe src="../index.html" width="1366" height="768"></iframe></figure>
+    <figure><figcaption>1280</figcaption><iframe src="../index.html" width="1280" height="720"></iframe></figure>
+    <figure><figcaption>1024</figcaption><iframe src="../index.html" width="1024" height="700"></iframe></figure>
+    <figure><figcaption>768</figcaption><iframe src="../index.html" width="768" height="700"></iframe></figure>
+    <figure><figcaption>390</figcaption><iframe src="../index.html" width="390" height="700"></iframe></figure>
+  </div>
+</body>
+</html>

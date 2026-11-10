@@ -107,7 +107,7 @@
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 860) setOpen(false);
+      if (window.innerWidth > 1100) setOpen(false);
     });
   }
 
@@ -118,6 +118,66 @@
     const isHome = (current === "" || current === "index.html") && href === "index.html";
     link.classList.toggle("active", isHome || href === current);
   });
+
+  /* 2b. Hero carousel ----------------------------------------------------- */
+  const hero = $(".hero");
+  const heroSlides = $$(".hero-slide");
+
+  if (hero && heroSlides.length > 1) {
+    const dots = $$(".hero-dot");
+    const arrows = $$(".hero-arrow");
+    let index = 0;
+    let timer = null;
+    const DELAY = 6000;
+
+    const show = (next) => {
+      index = (next + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, i) => slide.classList.toggle("is-active", i === index));
+      dots.forEach((dot, i) => {
+        const active = i === index;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-current", active ? "true" : "false");
+      });
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    };
+
+    const start = () => {
+      if (reduceMotion) return;
+      stop();
+      timer = window.setInterval(() => show(index + 1), DELAY);
+    };
+
+    const restart = () => {
+      stop();
+      start();
+    };
+
+    show(0);
+    start();
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener("click", () => {
+        show(index + (arrow.dataset.dir === "next" ? 1 : -1));
+        restart();
+      });
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        show(i);
+        restart();
+      });
+    });
+
+    hero.addEventListener("mouseenter", stop);
+    hero.addEventListener("mouseleave", start);
+    hero.addEventListener("focusin", stop);
+    hero.addEventListener("focusout", start);
+  }
 
   /* 3. Reveal on scroll ---------------------------------------------------- */
   if (!reduceMotion && "IntersectionObserver" in window) {
@@ -431,13 +491,18 @@
     });
   }
 
-  /* 7. Scroll to top ------------------------------------------------------- */
+  /* 7. Scroll to top -------------------------------------------------------- */
   const scrollTopBtn = $("#scrollTop");
-  if (scrollTopBtn) {
+  const socialStack = $(".floating-social");
+
+  if (scrollTopBtn || socialStack) {
     let ticking = false;
 
     const update = () => {
-      scrollTopBtn.classList.toggle("visible", window.scrollY > 480);
+      const past = window.scrollY > 480;
+      if (scrollTopBtn) scrollTopBtn.classList.toggle("visible", past);
+      // Keep the social stack off the hero so it never covers the headline or buttons.
+      if (socialStack) socialStack.classList.toggle("is-visible", window.scrollY > 320);
       ticking = false;
     };
 
@@ -451,7 +516,9 @@
       { passive: true }
     );
     update();
+  }
 
+  if (scrollTopBtn) {
     scrollTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
       const skip = $(".nav-logo");

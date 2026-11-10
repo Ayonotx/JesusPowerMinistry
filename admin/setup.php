@@ -45,7 +45,7 @@ require_once __DIR__ . '/inc/layout.php';
 <meta name="robots" content="noindex,nofollow">
 <title>First-time setup · JPSMRC Admin</title>
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/admin.css?v=20261110">
+<link rel="stylesheet" href="assets/admin.css?v=20261110e">
 </head>
 <body class="auth-page">
 <main class="auth-card">

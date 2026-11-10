@@ -566,10 +566,9 @@ p {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 640px;
-  height: 88svh;
-  max-height: 900px;
-  padding-top: calc(var(--header-h) + 48px);
+  min-height: min(88svh, 860px);
+  height: auto;
+  padding-top: calc(var(--header-h) + 96px);
   padding-bottom: clamp(40px, 7vw, 88px);
   overflow: hidden;
   color: var(--white);
@@ -586,28 +585,22 @@ p {
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: heroCycle 30s infinite;
+  transform: scale(1.02);
+  transition: opacity 900ms var(--ease), transform 6s linear;
+  will-change: opacity;
 }
 
-.hero-slide:nth-child(1) { animation-delay: 0s; }
-.hero-slide:nth-child(2) { animation-delay: 6s; }
-.hero-slide:nth-child(3) { animation-delay: 12s; }
-.hero-slide:nth-child(4) { animation-delay: 18s; }
-.hero-slide:nth-child(5) { animation-delay: 24s; }
+.hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
 
 .hero-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-}
-
-@keyframes heroCycle {
-  0% { opacity: 0; }
-  3% { opacity: 1; }
-  17% { opacity: 1; }
-  20% { opacity: 0; }
-  100% { opacity: 0; }
 }
 
 .hero-overlay {
@@ -670,12 +663,76 @@ p {
 }
 
 .hero-actions .btn-primary {
-  background: var(--white);
-  color: var(--navy);
+  background: var(--gold);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(176, 141, 79, 0.28);
 }
 
 .hero-actions .btn-primary:hover {
-  background: var(--gold-100);
+  background: var(--gold-700);
+  transform: translateY(-1px);
+}
+
+/* Carousel controls */
+.hero-controls {
+  position: absolute;
+  right: max(var(--s-5), calc((100vw - var(--container)) / 2 + var(--s-5)));
+  bottom: clamp(28px, 5vw, 56px);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.hero-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(20, 32, 58, 0.28);
+  backdrop-filter: blur(4px);
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+.hero-arrow:hover {
+  background: rgba(20, 32, 58, 0.55);
+  border-color: #fff;
+}
+
+.hero-arrow .icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.hero-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: var(--s-2);
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.38);
+  transition: background-color var(--transition), width var(--transition);
+}
+
+.hero-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.hero-dot.is-active {
+  width: 22px;
+  border-radius: 4px;
+  background: var(--gold);
 }
 
 .hero-meta {
@@ -1705,7 +1762,17 @@ p {
   z-index: 900;
   display: flex;
   flex-direction: column;
-  gap: var(--s-2);
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+}
+
+.floating-social.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
 }
 
 .floating-social-btn {
@@ -1713,27 +1780,27 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 14px rgba(20, 32, 58, 0.22);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .floating-social-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 22px rgba(20, 32, 58, 0.3);
 }
 
 .floating-social-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   fill: #fff;
 }
 
 .floating-social-btn .tooltip {
   position: absolute;
-  right: 62px;
+  right: 56px;
   top: 50%;
   transform: translateY(-50%);
   padding: 6px 12px;
@@ -2160,20 +2227,101 @@ details.disclosure > .course-list {
   }
 
   .hero-slide {
-    animation: none;
-    opacity: 0;
-  }
-
-  .hero-slide:first-child {
-    opacity: 1;
+    transition: none;
+    transform: none;
   }
 }
 
 /* 17. Breakpoints ---------------------------------------------------------- */
+@media (max-width: 1320px) {
+  /* Below the width where the page gutters can hold a vertical rail,
+     the social links become a centered bar so they never cover body text. */
+  .floating-social {
+    left: 50%;
+    right: auto;
+    bottom: 16px;
+    flex-direction: row;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    background: rgba(20, 32, 58, 0.84);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(20, 32, 58, 0.28);
+    transform: translate(-50%, 12px);
+  }
+
+  .floating-social.is-visible {
+    transform: translate(-50%, 0);
+  }
+
+  .floating-social-btn {
+    width: 38px;
+    height: 38px;
+    box-shadow: none;
+  }
+
+  .floating-social-btn svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .floating-social-btn .tooltip {
+    display: none;
+  }
+
+  .scroll-top {
+    bottom: 16px;
+  }
+
+  /* Keep the footer's last line clear of the bar. */
+  .footer-bottom {
+    padding-bottom: 64px;
+  }
+}
+
 @media (max-width: 1100px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--s-4) var(--s-5) var(--s-8);
+    background: var(--navy);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--transition), visibility var(--transition),
+      transform var(--transition);
+  }
+
+  .nav-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
   .nav-link {
-    padding-inline: 9px;
-    font-size: 0.8rem;
+    padding: 15px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    font-size: 1rem;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: none;
+  }
+
+  .nav-link.active {
+    color: var(--gold);
   }
 }
 
@@ -2228,58 +2376,14 @@ details.disclosure > .course-list {
   }
 }
 
-@media (max-width: 860px) {
-  .nav-toggle {
-    display: flex;
-  }
-
-  .nav-menu {
-    position: fixed;
-    inset: var(--header-h) 0 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: var(--s-4) var(--s-5) var(--s-8);
-    background: var(--navy);
-    overflow-y: auto;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: opacity var(--transition), visibility var(--transition),
-      transform var(--transition);
-  }
-
-  .nav-menu.is-open {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-  }
-
-  .nav-link {
-    padding: 15px 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0;
-    font-size: 1rem;
-  }
-
-  .nav-link:hover,
-  .nav-link.active {
-    background: none;
-  }
-
-  .nav-link.active {
-    color: var(--gold);
-  }
-
-  .hero {
-    min-height: 520px;
-  }
-}
-
 @media (max-width: 720px) {
   .section {
     padding-block: clamp(44px, 9vw, 64px);
+  }
+
+  /* Leave room for the carousel controls below the hero buttons. */
+  .hero {
+    padding-bottom: 80px;
   }
 
   .services-grid-home,
@@ -2326,14 +2430,9 @@ details.disclosure > .course-list {
     display: none;
   }
 
-  .floating-social {
-    right: var(--s-4);
-    bottom: var(--s-4);
-  }
-
   .scroll-top {
     left: var(--s-4);
-    bottom: var(--s-4);
+    bottom: 16px;
   }
 
   .lightbox-nav {
@@ -2376,13 +2475,13 @@ details.disclosure > .course-list {
   }
 
   .floating-social-btn {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
   }
 
   .floating-social-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .floating-social-btn .tooltip {

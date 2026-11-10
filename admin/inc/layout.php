@@ -26,7 +26,7 @@ function admin_header(string $title, string $active = ''): void
 <meta name="robots" content="noindex,nofollow">
 <title><?= e($title) ?> · JPSMRC Admin</title>
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/admin.css?v=20261110">
+<link rel="stylesheet" href="assets/admin.css?v=20261110e">
 </head>
 <body class="admin">
 <a class="skip" href="#content">Skip to content</a>
@@ -65,7 +65,7 @@ function admin_footer(): void
     ?>
   </main>
 </div>
-<script src="assets/admin.js?v=20261110" defer></script>
+<script src="assets/admin.js?v=20261110e" defer></script>
 </body>
 </html>
 <?php
