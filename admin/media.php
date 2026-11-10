@@ -144,6 +144,7 @@ if ($errors): ?>
           <option value="nature">Nature</option>
           <option value="events">Events</option>
           <option value="school">School of Ministry</option>
+          <option value="celebrations">Celebrations</option>
         </select>
       </div>
     </div>
@@ -173,7 +174,7 @@ if ($errors): ?>
             <div class="field">
               <label for="cat-<?= e((string) $row['id']) ?>">Category</label>
               <select id="cat-<?= e((string) $row['id']) ?>" name="category">
-                <?php foreach (['general', 'exterior', 'interior', 'nature', 'events', 'school'] as $cat): ?>
+                <?php foreach (['general', 'exterior', 'interior', 'nature', 'events', 'school', 'celebrations'] as $cat): ?>
                   <option value="<?= e($cat) ?>" <?= (($row['category'] ?? '') === $cat) ? 'selected' : '' ?>><?= e(ucfirst($cat)) ?></option>
                 <?php endforeach; ?>
               </select>

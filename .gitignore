@@ -19,3 +19,5 @@ assets/img/uploads/*
 
 # Build artefacts
 deploy-*.zip
+
+incoming/

@@ -1,6 +1,6 @@
 import { readFile, writeFile, readdir } from "node:fs/promises";
 
-const VERSION = "20261110e";
+const VERSION = "20261110f";
 
 const htmlFiles = (await readdir(".")).filter((f) => f.endsWith(".html"));
 let changed = 0;
