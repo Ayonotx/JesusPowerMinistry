@@ -34,7 +34,7 @@ if (is_post()) {
 <meta name="robots" content="noindex,nofollow">
 <title>Sign in · JPSMRC Admin</title>
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/admin.css?v=20261110g">
+<link rel="stylesheet" href="assets/admin.css?v=20261110h">
 </head>
 <body class="auth-page">
 <main class="auth-card">

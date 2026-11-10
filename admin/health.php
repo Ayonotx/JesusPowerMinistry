@@ -79,7 +79,7 @@ $failed = count(array_filter($checks, static fn ($c) => !$c['ok']));
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Diagnostics · JPSMRC Admin</title>
-<link rel="stylesheet" href="assets/admin.css?v=20261110g">
+<link rel="stylesheet" href="assets/admin.css?v=20261110h">
 </head>
 <body class="auth-page">
 <main class="auth-card auth-card--wide">

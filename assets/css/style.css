@@ -1877,16 +1877,20 @@ p {
 
 .lecturer-card img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   margin-bottom: var(--s-4);
   border-radius: var(--radius);
   object-fit: cover;
-  object-position: 50% 22%;
+  object-position: 50% 14%;
 }
 
-.lecturer-card .lecturer-img-akomeah,
+/* Tallest source photo (470x919) — pin to the top so the head is never cropped. */
+.lecturer-card .lecturer-img-akomeah {
+  object-position: 50% 0%;
+}
+
 .lecturer-card .lecturer-img-marfo {
-  object-position: 50% 12%;
+  object-position: 50% 8%;
 }
 
 .lecturer-card h3 {
