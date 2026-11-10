@@ -2383,7 +2383,7 @@ details.disclosure > .course-list {
 
   /* Leave room for the carousel controls below the hero buttons. */
   .hero {
-    padding-bottom: 80px;
+    padding-bottom: 92px;
   }
 
   .services-grid-home,
@@ -2459,7 +2459,8 @@ details.disclosure > .course-list {
 
   .hero {
     min-height: 480px;
-    padding-bottom: 40px;
+    /* Room for the stacked full-width buttons *and* the carousel controls. */
+    padding-bottom: 104px;
   }
 
   .hero-title {

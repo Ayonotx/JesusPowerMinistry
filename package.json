@@ -1,0 +1,23 @@
+{
+  "name": "jpsmrc-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayonotx/JesusPowerMinistry.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayonotx/JesusPowerMinistry/issues"
+  },
+  "homepage": "https://github.com/Ayonotx/JesusPowerMinistry#readme",
+  "description": "",
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}
