@@ -95,6 +95,66 @@ try {
     const res = await request("/execute/Fileman/mkdir", { dir, name, permissions: "0755" });
     const json = parse(res.body);
     console.log("HTTP", res.status, "mkdir", name, json.errors?.length ? json.errors.join("; ") : "ok");
+  } else if (command === "upload") {
+    // Multipart upload: upload <localFile> <remoteDir>
+    const [localPath, remoteDir] = args;
+    const bytes = await readFile(localPath);
+    const filename = basename(localPath);
+    const boundary = "----jpsmrc" + Date.now().toString(16);
+    const head = Buffer.from(
+      `--${boundary}\r\n` +
+        `Content-Disposition: form-data; name="dir"\r\n\r\n` +
+        `${remoteDir}\r\n` +
+        `--${boundary}\r\n` +
+        `Content-Disposition: form-data; name="file-1"; filename="${filename}"\r\n` +
+        `Content-Type: application/octet-stream\r\n\r\n`
+    );
+    const tail = Buffer.from(`\r\n--${boundary}--\r\n`);
+    const payload = Buffer.concat([head, bytes, tail]);
+
+    const res = await new Promise((resolve, reject) => {
+      const r = https.request(
+        {
+          host: config.host,
+          port: config.port,
+          path: "/execute/Fileman/upload_files",
+          method: "POST",
+          agent,
+          headers: {
+            Authorization: `cpanel ${config.user}:${config.token}`,
+            "Content-Type": `multipart/form-data; boundary=${boundary}`,
+            "Content-Length": payload.length,
+            "User-Agent": "jpsmrc-deploy/1.0",
+          },
+          timeout: 120000,
+        },
+        (reply) => {
+          const chunks = [];
+          reply.on("data", (c) => chunks.push(c));
+          reply.on("end", () => resolve({ status: reply.statusCode, body: Buffer.concat(chunks).toString("utf8") }));
+        }
+      );
+      r.on("timeout", () => r.destroy(new Error("timeout")));
+      r.on("error", reject);
+      r.write(payload);
+      r.end();
+    });
+
+    const json = parse(res.body);
+    const errs = json.errors || [];
+    console.log(`HTTP ${res.status} ${errs.length ? "FAIL " + errs.join("; ") : "ok"} ${filename} ${bytes.length}b → ${remoteDir}`);
+    if (errs.length) process.exitCode = 1;
+  } else if (command === "exec") {
+    // Generic UAPI call: exec <Module> <function> key=value ...
+    const [module, func, ...pairs] = args;
+    const params = new URLSearchParams();
+    for (const pair of pairs) {
+      const i = pair.indexOf("=");
+      if (i > 0) params.set(pair.slice(0, i), pair.slice(i + 1));
+    }
+    const res = await request(`/execute/${module}/${func}?${params.toString()}`);
+    console.log("HTTP", res.status);
+    console.log(res.body.slice(0, 2000));
   } else if (command === "api2") {
     // Generic cPanel API2 call:  api2 <module> <func> key=value ...
     const [module, func, ...pairs] = args;

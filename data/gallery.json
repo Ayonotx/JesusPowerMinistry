@@ -1,3 +1,12 @@
 {
-  "items": []
+  "items": [
+    {
+      "id": "p-birthday60-koomson",
+      "src": "assets/img/uploads/birthday-60-koomson.jpg",
+      "caption": "60th birthday celebration of Pastor Stephen Asankoma Koomson (PhD) — 31 October 2026",
+      "category": "celebrations",
+      "added": "2026-11-24T19:30:00+00:00",
+      "published": true
+    }
+  ]
 }

@@ -52,6 +52,20 @@ function parse(body) {
   }
 }
 
+/** The shared host resets connections now and then — retry a few times. */
+async function send(path, form, attempts = 3) {
+  let lastError;
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      return await request(path, form);
+    } catch (error) {
+      lastError = error;
+      await new Promise((resolve) => setTimeout(resolve, 700 * (attempt + 1)));
+    }
+  }
+  throw lastError;
+}
+
 const DIRS = [
   "/public_html/admin",
   "/public_html/admin/inc",
@@ -120,7 +134,7 @@ for (const dir of DIRS) {
     name,
     permissions: "0755",
   };
-  const res = await request(`/json-api/cpanel?${new URLSearchParams(params).toString()}`);
+  const res = await send(`/json-api/cpanel?${new URLSearchParams(params).toString()}`);
   let parsed;
   try {
     parsed = JSON.parse(res.body).cpanelresult;
@@ -143,7 +157,7 @@ for (const [local, remote] of FILES) {
     continue;
   }
 
-  const res = await request("/execute/Fileman/save_file_content", {
+  const res = await send("/execute/Fileman/save_file_content", {
     dir,
     file,
     content,

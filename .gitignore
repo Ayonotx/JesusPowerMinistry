@@ -21,3 +21,9 @@ assets/img/uploads/*
 deploy-*.zip
 
 incoming/
+
+# Private credentials and working documents — never publish
+JPSMRC-Admin-Login.pdf
+JPSMRC-WhatsApp-Message.txt
+tools/login-sheet.html
+
