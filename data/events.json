@@ -68,6 +68,16 @@
       "description": "Launched on 28 February 2026 to support children in the community with academic learning while nurturing their spiritual growth.",
       "image": "assets/img/optimized/reading-club-activities.jpg",
       "published": true
+    },
+    {
+      "id": "birthday60-2026",
+      "title": "60th birthday celebration of Pastor Stephen Asankoma Koomson (PhD)",
+      "date": "2026-10-31",
+      "category": "milestone",
+      "description": "60th birthday celebration of Pastor Stephen Asankoma Koomson (PhD) at Grace Centre, Dawhenya — Saturday 31 October 2026, 10:00am.",
+      "image": "assets/img/uploads/birthday-60-koomson.jpg",
+      "published": true,
+      "featured": false
     }
   ]
 }
